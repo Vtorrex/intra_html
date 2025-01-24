@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Audios</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">Tabla de audios disponibles</h1>
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Nro</th>
+            <th scope="col">Tema</th>
+            <th scope="col">Author</th>
+            <th scope="col">Tamaño</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>SharePoint ¿Qué es? y ¿Cómo usarlo?</td>
+            <td>Mentori Online</td>
+            <td>2,846 KB</td>
+            <td>
+              <button type="button" class="btn btn-primary btn-sm" onclick="playAudio(1)">
+                <i class="fas fa-play"></i> Reproducir
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="stopAudio()">
+                <i class="fas fa-stop"></i> Parar
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                <i class="far fa-trash-alt"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>SharePoint en 1 minuto</td>
+            <td>Teacher's Tech</td>
+            <td>3,417 KB</td>
+            <td>
+              <button type="button" class="btn btn-primary btn-sm" onclick="playAudio(2)">
+                <i class="fas fa-play"></i> Reproducir
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="stopAudio()">
+                <i class="fas fa-stop"></i> Parar
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                <i class="far fa-trash-alt"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Bootstrap Flexbox Tutorial and Examples</td>
+            <td>Cristina</td>
+            <td>1,234 KB</td>
+            <td>
+              <button type="button" class="btn btn-primary btn-sm" onclick="playAudio(3)">
+                <i class="fas fa-play"></i> Reproducir
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="stopAudio()">
+                <i class="fas fa-stop"></i> Parar
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                <i class="far fa-trash-alt"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let currentAudio = null; // Variable para almacenar el audio actual
+
+  // Función para reproducir un audio basado en el número de fila
+  function playAudio(rowNumber) {
+    // Si hay un audio reproduciéndose, lo pausamos primero
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0; // Reinicia el audio anterior
+    }
+
+    // Crea un objeto Audio con la ruta dinámica
+    const audioPath = `audios/audio${rowNumber}.mp3`;
+    currentAudio = new Audio(audioPath);
+
+    // Reproduce el audio
+    currentAudio.play();
+  }
+
+  // Función para detener el audio actual
+  function stopAudio() {
+    if (currentAudio) {
+      currentAudio.pause(); // Pausa el audio actual
+      currentAudio.currentTime = 0; // Reinicia el tiempo del audio
+      currentAudio = null; // Resetea la referencia al audio
+    }
+  }
+
+  // Función para eliminar una fila
+  function deleteRow(button) {
+    // Detiene cualquier audio en reproducción
+    stopAudio();
+
+    // Obtiene la fila que contiene el botón y la elimina
+    const row = button.closest('tr');
+    row.remove();
+  }
+</script>
+</body>
+</html>

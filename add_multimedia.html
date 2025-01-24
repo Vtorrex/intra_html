@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Carousel</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .carousel-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Ocupa toda la altura de la ventana */
+      flex-direction: column; /* Asegura que el contenido se alinee verticalmente */
+    }
+    .card {
+      display: flex;
+      flex-direction: column; /* Alinea el video y los botones en columna */
+      justify-content: flex-start; /* Alinea desde el principio */
+      align-items: center;
+      width: 90%; /* Aumenta el tamaño de la tarjeta */
+      max-width: 1000px; /* Aumenta el tamaño máximo de la tarjeta */
+      height: auto; /* Ajusta dinámicamente el tamaño */
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 40px; /* Aumenta el espacio interno de la tarjeta */
+    }
+    video {
+      width: 100%;
+      height: auto;
+      max-height: 70vh; /* Limita la altura máxima del video para que no ocupe toda la pantalla */
+      border-radius: 5px;
+      display: block; /* Asegura que el video no tenga márgenes */
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px; /* Aumenta el margen superior para dar más espacio */
+      width: 100%; /* Se ajusta al tamaño de la tarjeta */
+    }
+    .btn-group button {
+      width: 48%; /* Botones más pequeños y espaciados */
+      font-size: 1.2rem; /* Aumenta el tamaño de la fuente de los botones */
+    }
+  </style>
+</head>
+<body>
+
+<div id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <!-- First page -->
+    <div class="carousel-item active">
+      <div class="card">
+        <video src="videos/video1.mp4" controls></video>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="enterFullscreen(this)">Pantalla Completa</button>
+          <button class="btn btn-success" onclick="downloadVideo('videos/video1.mp4')">Descargar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<script>
+  // Función para poner el video en pantalla completa
+  function enterFullscreen(button) {
+    const video = button.parentElement.previousElementSibling;
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) { // Para Safari
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) { // Para IE/Edge
+      video.msRequestFullscreen();
+    }
+  }
+
+  // Función para descargar el video
+  function downloadVideo(url) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = url.split('/').pop(); // Extraer el nombre del archivo desde la URL
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+</script>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
