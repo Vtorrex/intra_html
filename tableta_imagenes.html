@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería con Enlaces y Redes Sociales</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +19,7 @@
             justify-content: center;
             gap: 20px;
             padding: 40px;
-            flex-wrap: wrap; /* Permite que las imágenes se ajusten en pantallas pequeñas */
+            flex-wrap: wrap;
         }
 
         .image-card {
@@ -49,7 +50,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo transparente oscuro */
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
             display: flex;
             justify-content: center;
@@ -77,67 +78,252 @@
 
         .social-links a {
             margin: 0 10px;
-            color: #333;
-            font-size: 2em;
+            font-size: 2.5em;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #1da1f2; /* Azul para Twitter */
+            transform: scale(1.2);
         }
 
-        .social-links a.youtube:hover {
-            color: #ff0000; /* Rojo para YouTube */
+        .social-links .instagram {
+            color: #e1306c;
         }
 
-        .social-links a.instagram:hover {
-            color: #e1306c; /* Rosa para Instagram */
+        .social-links .twitter {
+            color: #1da1f2;
+        }
+
+        .social-links .youtube {
+            color: #ff0000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            max-width: 90%;
+            width: 500px;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* Mantiene la proporción de la imagen */
+            border-radius: 10px;
+        }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 100;
+        }
+
+        .carousel-control.prev {
+            left: 10px;
+        }
+
+        .carousel-control.next {
+            right: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 90%;
+                padding: 10px;
+            }
+
+            .carousel-control {
+                font-size: 1.2em;
+                padding: 5px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center; padding: 20px;">Galería de Imágenes</h1>
+    <h1 style="text-align: center; padding: 20px;">Momentos que Inspiran Crecimiento</h1>
 
     <div class="gallery-container">
-        <a href="noticias_img/img6.jpg" target="_blank" class="image-card">
+        <a href="#" class="image-card">
             <img src="noticias_img/img6.jpg" alt="Imagen 1">
             <div class="overlay">
-                <p>Texto sobre Imagen 1</p>
+                <p>Centro Odontológico</p>
             </div>
         </a>
-        <a href="noticias_img/img7.jpg" target="_blank" class="image-card">
+        <a href="#" class="image-card">
             <img src="noticias_img/img7.jpg" alt="Imagen 2">
             <div class="overlay">
-                <p>Texto sobre Imagen 2</p>
+                <p>Integración de energías regionales</p>
             </div>
         </a>
-        <a href="noticias_img/img8.jpg" target="_blank" class="image-card">
+        <a href="#" class="image-card">
             <img src="noticias_img/img8.jpg" alt="Imagen 3">
             <div class="overlay">
-                <p>Texto sobre Imagen 3</p>
+                <p>Plantar un árbol es plantar vida y futuro</p>
             </div>
         </a>
-        <a href="noticias_img/img9.jpg" target="_blank" class="image-card">
+        <a href="#" class="image-card">
             <img src="noticias_img/img9.jpg" alt="Imagen 4">
             <div class="overlay">
-                <p>Texto sobre Imagen 4</p>
+                <p>Tecnología</p>
             </div>
         </a>
     </div>
 
     <div class="social-links">
         <a href="https://www.instagram.com" target="_blank" class="instagram" aria-label="Instagram">
-            &#xf16d;
+            <i class="fab fa-instagram"></i>
         </a>
         <a href="https://twitter.com" target="_blank" class="twitter" aria-label="Twitter">
-            &#xf099;
+            <i class="fab fa-twitter"></i>
         </a>
         <a href="https://www.youtube.com" target="_blank" class="youtube" aria-label="YouTube">
-            &#xf167;
+            <i class="fab fa-youtube"></i>
         </a>
     </div>
 
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <!-- Las imágenes del carrusel se insertarán aquí dinámicamente -->
+                </div>
+                <button class="carousel-control prev">&#10094;</button>
+                <button class="carousel-control next">&#10095;</button>
+            </div>
+            <p id="modalText">Texto adicional sobre la imagen.</p>
+        </div>
+    </div>
+
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        const imageCards = document.querySelectorAll(".image-card");
+        const modal = document.getElementById("imageModal");
+        const carouselInner = document.querySelector(".carousel-inner");
+        const modalText = document.getElementById("modalText");
+        const closeModal = document.querySelector(".close");
+
+        // Datos de ejemplo para las imágenes del carrusel
+        const carouselData = [
+            {
+                images: ["noticias_img/img6.jpg", "noticias_img/img10.jpg", "noticias_img/img11.jpg", "noticias_img/img12.jpg", "noticias_img/img13.jpg"],
+                text: "Odontologia"
+            },
+            {
+                images: ["noticias_img/img7.jpg", "noticias_img/img14.jpg", "noticias_img/img15.jpg", "noticias_img/img16.jpg", "noticias_img/img17.jpg"],
+                text: "Energia"
+            },
+            {
+                images: ["noticias_img/img8.jpg", "noticias_img/img19.jpg", "noticias_img/img20.jpg", "noticias_img/img21.jpg", "noticias_img/img22.jpg"],
+                text: "Ambiente"
+            },
+            {
+                images: ["noticias_img/img9.jpg", "noticias_img/img23.jpg", "noticias_img/img24.jpg", "noticias_img/img25.jpg", "noticias_img/img26.jpg", "noticias_img/img27.jpg"],
+                text: "Tecnologia"
+            },
+            // Agrega más conjuntos de imágenes y textos según sea necesario
+        ];
+
+        imageCards.forEach((card, index) => {
+            card.addEventListener("click", (e) => {
+                e.preventDefault();
+                const data = carouselData[index];
+                carouselInner.innerHTML = ""; // Limpiar el carrusel
+
+                data.images.forEach(imgSrc => {
+                    const img = document.createElement("img");
+                    img.src = imgSrc;
+                    carouselInner.appendChild(img);
+                });
+
+                modalText.textContent = data.text;
+                modal.style.display = "flex";
+                currentIndex = 0; // Reiniciar el índice del carrusel
+                updateCarousel();
+            });
+        });
+
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Funcionalidad del carrusel
+        let currentIndex = 0;
+
+        document.querySelector(".carousel-control.next").addEventListener("click", () => {
+            if (currentIndex < carouselInner.children.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        document.querySelector(".carousel-control.prev").addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            carouselInner.style.transform = `translateX(${offset}%)`;
+        }
+    </script>
 </body>
 </html>
