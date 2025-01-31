@@ -14,11 +14,11 @@
             margin: 0;
         }
         .barra {
-            width: 80%;
+            width: 50%; /* Reducido para mejor efecto */
             overflow: hidden;
             white-space: nowrap;
-            background-color: white;
-            color: #273A53;
+            background-color: #273A53;
+            color: white;
             padding: 20px;
             font-size: 24px;
             font-weight: bold;
@@ -27,26 +27,30 @@
             position: relative;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        .contenido {
-            display: inline-block;
-            animation: mover 4s linear infinite alternate;
+        .contenedor {
+            display: flex;
+            width: max-content;
+            animation: mover 15s linear infinite;
         }
-        .barra:hover .contenido {
+        .barra:hover .contenedor {
             animation-play-state: paused;
         }
         @keyframes mover {
-            0% {
-                transform: translateX(-20%);
+            from {
+                transform: translateX(0);
             }
-            100% {
-                transform: translateX(20%);
+            to {
+                transform: translateX(-50%);
             }
         }
     </style>
 </head>
 <body>
     <div class="barra">
-        <span class="contenido">ANDE: Generación        +       Transmisión      +    Distribución     +      Comercialización :ANDE</span>
+        <div class="contenedor">
+            <span>__Generación___Transmisión___Distribución___Comercialización__ ANDE&nbsp; </span>
+            <span>__Generación___Transmisión___Distribución___Comercialización__&nbsp; </span>
+        </div>
     </div>
 </body>
 </html>
