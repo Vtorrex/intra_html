@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización diaria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #273A53;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #273A53;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .currency {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cotización diaria</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Moneda</th>
+                <th>Compra</th>
+                <th>Venta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set lines = cotizacion.split('\n') %}
+            {% set skip_lines = ['Currency', 'We buy', 'We sell'] %}
+            {% for i in range(0, lines|length, 3) %}
+                {% if lines[i].strip() not in skip_lines %}
+                    <tr>
+                        <td class="currency">{{ lines[i].strip() }}</td>
+                        <td>{{ lines[i+1].strip() if i+1 < lines|length else '' }}</td>
+                        <td>{{ lines[i+2].strip() if i+2 < lines|length else '' }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
