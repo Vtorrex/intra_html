@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botones Dinámicos</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #273A53;
+            margin: 0;
+        }
+        .contenedor {
+            display: flex;
+            gap: 20px;
+        }
+        .boton {
+            width: 150px;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .boton:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="boton" style="background-image: url('https://via.placeholder.com/150');" onclick="window.open('https://www.google.com', '_blank')"></div>
+        <div class="boton" style="background-image: url('https://via.placeholder.com/150');" onclick="window.open('https://www.facebook.com', '_blank')"></div>
+        <div class="boton" style="background-image: url('https://via.placeholder.com/150');" onclick="window.open('https://www.twitter.com', '_blank')"></div>
+    </div>
+</body>
+</html>
